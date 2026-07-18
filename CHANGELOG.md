@@ -1,5 +1,7 @@
 # Changelog - AI Extension
 
+## v1.0 - 2026-07-18
+
 ## 1.1
 
 - **Multi-provider support:** Anthropic (Claude), OpenAI (GPT-4o), Google Gemini 2.5, and
