@@ -24,6 +24,8 @@
 - **Bug fix:** clearing the API key field had no effect. Fixed by distinguishing an untouched
   masked field from an intentionally empty one.
 
+## v1.0 - 2026-07-18
+
 ## 1.0
 
 - Initial release.
