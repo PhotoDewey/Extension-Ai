@@ -1,5 +1,8 @@
 # Changelog - AI Extension
 
+## v1.2 - 2026-11-16
+- Added a user manual (Help > Extensions > AI).
+
 ## v1.1 - 2026-07-31
 
 ## v1.0 - 2026-07-18
