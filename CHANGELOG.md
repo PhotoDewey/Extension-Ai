@@ -1,5 +1,14 @@
 # Changelog - AI Extension
 
+## v2.0 - 2026-11-17
+- New: AI agent. A chat bubble in the bottom-right corner opens a chat panel where you can ask about your library (tags, people, dates, albums, edits, metadata, file locations) and have the agent look at photos and suggest improvements.
+- Pick the provider and model directly in the chat.
+- Optional changes (off by default, enable in Settings, AI tab): the agent can tag, rate, set titles and descriptions, manage album membership and apply non-destructive edits. Every change asks first by default, and each one is a single undoable History entry prefixed "AI agent:".
+- Estimated cost line under every answer, and a new Usage section in Settings with monthly totals, a 30-day chart and breakdowns per model and feature.
+- Updated model lists and prices for Anthropic, OpenAI and Google Gemini.
+- Removed: Ollama support.
+- Requires PhotoDewey 1.1 or later.
+
 ## v1.2 - 2026-11-16
 - Added a user manual (Help > Extensions > AI).
 
