@@ -1,24 +1,35 @@
 # AI - PhotoDewey Extension
 
-AI-powered features for your photo library: tag suggestions from image analysis and automatic
-tag-tree reorganization. Works with Anthropic (Claude), OpenAI, Google Gemini, and local Ollama.
+AI-powered features for your photo library: an AI agent you can chat with about your library,
+tag suggestions and descriptions from image analysis, and automatic tag-tree reorganization.
+Works with Anthropic (Claude), OpenAI and Google Gemini.
+
+> Requires PhotoDewey 1.1 or later.
 
 ---
 
 ## Features
 
-- One-click AI tag suggestions from the photo's image and metadata
-- Hierarchical tag paths (e.g. `nature/water/lake`) that fit PhotoDewey's tag system
-- Reuses your existing tags as context so suggestions match your library
-- Image description generated alongside tags (shown in the Properties dialog)
-- Token usage shown after each analysis
-- Photos that have been analysed are marked with an **AI** badge in the gallery and can be
-  filtered with the **Has AI content / Missing AI content** filter in the gallery toolbar
-- Re-analysis confirmation with date of last analysis shown
-- AI-powered tag-tree reorganization: click the sparkle button in the Tag Hierarchy header
-  to have AI propose a cleaner hierarchy, review the proposed changes, then apply with one click
-- Full undo support for tag-tree reorganization
-- Per-provider **Active** toggle in Settings
+- **AI agent:** a chat bubble in the bottom-right corner of the main window opens a chat panel.
+  Ask about your library in plain language ("Which photos of Mormor have edits?") and the agent
+  searches by tag, person, date, folder, rating, album, camera, place and more, reads metadata,
+  faces and edits, and can look at photos to suggest improvements
+- Pick the provider and model directly in the chat; switch mid-conversation without losing it
+- Photo references in answers are clickable and reveal the photo in the gallery
+- **Optional changes:** when you allow it in Settings (off by default), the agent can tag, rate,
+  set titles and descriptions, sort photos into albums and apply non-destructive edits. By
+  default every change waits for your OK on a confirmation card ("Don't ask again" available)
+- Every agent change is one entry in the History panel, prefixed "AI agent:", and is undone
+  with Ctrl+Z. The agent can never delete, move or rename files, delete photos or tags, or
+  change your settings
+- **Estimated cost after every answer**, and a **Usage** section in Settings with monthly
+  totals, a 30-day chart and breakdowns per model and feature (estimates in USD)
+- One-click AI tag suggestions from the photo's image and metadata, as hierarchical tag paths
+  (e.g. `nature/water/lake`) that reuse your existing tags
+- AI image descriptions, written to the photo's Description field on request
+- Analysed photos get an **AI** badge in the gallery and a **Has AI content / Missing AI
+  content** filter
+- AI-powered tag-tree reorganization from the Tag Hierarchy header, with full undo
 - Your API keys are stored encrypted (Windows DPAPI), per user
 
 ---
@@ -27,13 +38,14 @@ tag-tree reorganization. Works with Anthropic (Claude), OpenAI, Google Gemini, a
 
 | Provider | Requires API key | Notes |
 |----------|-----------------|-------|
-| Anthropic (Claude) | Yes | Vision support; rate limits shown in Settings |
-| OpenAI | Yes | GPT-4o vision |
-| Google Gemini | Yes | Gemini 2.5 Flash / Pro |
-| Ollama | No | Local models; set host URL in Settings |
+| Anthropic (Claude) | Yes | Claude Haiku, Sonnet and Opus; rate limits shown in Settings |
+| OpenAI | Yes | GPT-6 and GPT-4o models |
+| Google Gemini | Yes | Gemini Flash, Flash-Lite and Gemini 4 models |
 
-When more than one provider is marked **Active**, a small picker appears when you click the
-AI button so you can choose which one to use for that run.
+Ollama is no longer supported as of version 2.0.
+
+A Claude Pro/Max or ChatGPT Plus/Pro subscription does not include API access. You need API
+credits on the provider's developer website.
 
 ---
 
@@ -41,13 +53,24 @@ AI button so you can choose which one to use for that run.
 
 1. Install the extension from the PhotoDewey **Extension Shop** (Help > Extension Shop), or drop
    `PhotoDewey.AI.dll` into `%AppData%\PhotoDewey\Extensions\` and restart.
-2. Open **Settings > AI**.
-3. Expand the provider you want to use, paste your API key, and click **Save**.
-4. Click **Test** (the connection test runs automatically when you save a key). If the check
-   passes, tick the **Active** checkbox next to the provider name.
+2. Open **Tools > Settings > AI**.
+3. Expand the provider you want to use, paste your API key and click elsewhere. The key is
+   saved and the connection is checked.
+4. Tick the checkbox in front of the provider name to make it active for tag suggestions.
+5. Optionally choose the agent's default provider and model, and whether the agent may make
+   changes.
 
-For Ollama, set the host URL (default `http://localhost:11434`) and tick **Active** - no API key
-needed.
+---
+
+## Chatting with the AI agent
+
+1. Open a library and click the speech bubble in the bottom-right corner.
+2. Choose a provider and model at the top of the panel.
+3. Type a question and press **Enter**. Say "this photo" to mean the current selection.
+4. Under each answer a muted line shows the estimated cost, for example
+   `≈ $0.012 · 5,432 tokens in / 210 out · Claude Sonnet 5.5`.
+
+The conversation is kept until you click **New conversation** or close PhotoDewey.
 
 ---
 
@@ -55,37 +78,29 @@ needed.
 
 1. Select a photo.
 2. Click the sparkle icon next to the **Add Tag** box.
-3. The panel analyzes the photo and lists up to 15 suggested tags. Tick the ones you want.
-4. Click **Apply Selected** - tags are added to the photo.
-
-The photo now shows an **AI** badge in the gallery, and the analysis (tags, description, token
-usage) is recorded on the **AI** tab of its Properties dialog. If the photo already has AI data,
-you will be asked whether to re-analyze, and the date of the last analysis is shown.
+3. Tick the suggested tags you want and click **Apply Selected**.
 
 ---
 
 ## Reorganizing the tag tree
 
-1. Open the **Tags** panel (right-hand side) and expand **Tag Hierarchy**.
-2. Click the sparkle icon next to the **+** button.
-3. The dialog sends your full tag hierarchy to the AI and proposes a cleaner structure.
-4. Review the list of proposed moves/renames and the AI's rationale.
-5. Click **Apply Changes** to restructure the tree. All photos follow their tags automatically.
-
-The entire operation is recorded as a single undo step - press Ctrl+Z to restore the previous
-hierarchy.
+1. In the Tags panel, click the sparkle icon in the **Tag Hierarchy** header.
+2. Review the proposed moves and renames.
+3. Click **Apply Changes**. Ctrl+Z restores the previous tree.
 
 ---
 
 ## Privacy
 
-Suggesting tags for a photo sends a small thumbnail and metadata (filename, date, camera, GPS
-place name, title, description) to the chosen provider's API. Reorganizing the tag tree sends
-your tag paths as plain text - no photos or metadata. Nothing is sent until you click an AI
-button. Your API keys never leave your machine except as authentication headers on those requests.
+Nothing is sent until you click a sparkle icon or send a question in the chat. Tag suggestions
+send a small preview and some details of the photo. Tag-tree reorganization sends your tag paths
+only. The agent sends your question and what it reads to answer it (file names, folders, tags,
+people, albums, descriptions, places, face positions, edits), plus a preview of any photo it
+looks at. Your API keys never leave your machine except as authentication headers on those
+requests.
 
 ---
 
 ## Plugin Version
 
-1.1
+2.0
