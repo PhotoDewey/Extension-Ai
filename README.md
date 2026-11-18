@@ -19,6 +19,9 @@ Works with Anthropic (Claude), OpenAI and Google Gemini.
 - **Optional changes:** when you allow it in Settings (off by default), the agent can tag, rate,
   set titles and descriptions, sort photos into albums and apply non-destructive edits. By
   default every change waits for your OK on a confirmation card ("Don't ask again" available)
+- **Improve with AI:** select 1 to 3 photos and click **Improve** in the chat. The agent analyses
+  them, tries edits with the built-in tools without saving them, and saves the best result as a
+  virtual copy next to the original. The original photo is not changed
 - Every agent change is one entry in the History panel, prefixed "AI agent:", and is undone
   with Ctrl+Z. The agent can never delete, move or rename files, delete photos or tags, or
   change your settings
