@@ -1,5 +1,12 @@
 # Changelog - AI Extension
 
+## v2.1 - 2026-11-18
+- New: Improve with AI. Select 1 to 3 photos and click Improve in the AI chat. The agent analyses them, tries edits with the built-in tools and saves the best result as a virtual copy next to the original. The original photo is not changed.
+- The agent tries edits without saving them and checks the result before it saves. Auto Optimize results can be saved too.
+- Improving needs "Allow the agent to make changes" in Settings, AI tab. Each run asks before it makes the copies (when confirmation is on) and is one undo step.
+- Fixed: the provider and model dropdowns showed internal text instead of the name.
+- Requires PhotoDewey 1.1 or later.
+
 ## v2.0 - 2026-11-17
 - New: AI agent. A chat bubble in the bottom-right corner opens a chat panel where you can ask about your library (tags, people, dates, albums, edits, metadata, file locations) and have the agent look at photos and suggest improvements.
 - Pick the provider and model directly in the chat.
